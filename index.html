@@ -280,6 +280,45 @@ footer{
     font-size:25px;
   }
 }
+
+/* ===== PROJOTO GROWTH DASHBOARD ===== */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.stat{background:var(--card);border-radius:18px;padding:16px;text-align:center;box-shadow:var(--shadow)}
+.stat .icon{font-size:26px}.stat strong{display:block;font-size:24px;margin:4px 0}.stat small{color:var(--muted)}
+.score-ring{width:120px;height:120px;border-radius:50%;margin:10px auto;display:grid;place-items:center;background:conic-gradient(var(--good) var(--score,0%),#e5e7eb 0)}
+.score-ring>div{width:88px;height:88px;border-radius:50%;background:white;display:grid;place-items:center;font-weight:bold;font-size:22px}
+.reward{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:14px;background:#fff7ed;margin-top:12px}
+.weekbar{height:10px;background:#e5e7eb;border-radius:10px;overflow:hidden}.weekbar span{display:block;height:100%;background:linear-gradient(90deg,#f59e0b,#ef4444)}
+.quiz-question{font-size:19px;font-weight:bold;text-align:center;margin:12px 0}
+.quiz-answer{display:none;text-align:center;padding:10px;border-radius:12px;background:#ecfdf5;color:#166534;font-weight:bold}
+.celebrate{animation:pop .45s ease}.streak-fire{font-size:28px}
+@keyframes pop{50%{transform:scale(1.08)}}
+@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+
+/* 365-day brain challenge */
+.brain365-meta{display:flex;justify-content:space-between;gap:10px;margin:-4px 0 12px;color:var(--muted);font-size:.82rem}
+.brain365-meta span:first-child{font-weight:700}
+.brain-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.brain-option{border:2px solid var(--line);background:var(--card);color:var(--text);border-radius:14px;padding:12px 10px;font-weight:700;font-size:1rem;cursor:pointer;transition:.18s}
+.brain-option:hover{transform:translateY(-2px)}
+.brain-option.correct{border-color:#16a34a;background:#f0fdf4}
+.brain-option.wrong{border-color:#dc2626;background:#fef2f2}
+.brain-option:disabled{cursor:default;opacity:.96}
+@media(max-width:600px){.brain-options{grid-template-columns:1fr}.brain365-meta{font-size:.75rem}}
+
+
+/* 365-day brain challenge */
+.brain365-meta{display:flex;justify-content:space-between;gap:10px;margin:-4px 0 12px;color:var(--muted);font-size:.82rem}
+.brain365-meta span:first-child{font-weight:700}
+.brain-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.brain-option{border:2px solid var(--line);background:var(--card);color:var(--text);border-radius:14px;padding:12px 10px;font-weight:700;font-size:1rem;cursor:pointer;transition:.18s}
+.brain-option:hover{transform:translateY(-2px)}
+.brain-option.correct{border-color:#16a34a;background:#f0fdf4}
+.brain-option.wrong{border-color:#dc2626;background:#fef2f2}
+.brain-option:disabled{cursor:default;opacity:.96}
+@media(max-width:600px){.brain-options{grid-template-columns:1fr}.brain365-meta{font-size:.75rem}}
+
 </style>
 </head>
 
@@ -288,7 +327,7 @@ footer{
 
 <header>
 
-  <h1>♟️ Projoto's Daily World</h1>
+  <h1>♟️ Projoto's Daily World ♟️</h1>
 
   <p>
     Learn • Play • Be Kind • Grow Every Day
@@ -298,6 +337,24 @@ footer{
 
 
 <div class="container">
+
+<!-- ================= GROWTH DASHBOARD ================= -->
+<section class="stats-grid">
+  <div class="stat"><div class="icon">🏆</div><strong id="score">0</strong><small>Today's Points</small></div>
+  <div class="stat"><div class="icon">⭐</div><strong id="stars">0</strong><small>Total Stars</small></div>
+  <div class="stat"><div class="icon streak-fire">🔥</div><strong id="streak">1</strong><small>Day Streak</small></div>
+  <div class="stat"><div class="icon">📚</div><strong id="goalCount">0</strong><small>Goals Done</small></div>
+</section>
+
+<section class="card" style="margin-bottom:20px;text-align:center">
+  <h3>🌟 Today's Growth</h3>
+  <div class="score-ring" id="scoreRing"><div><span id="percent">0%</span></div></div>
+  <div class="progress-text"><span id="dashboardMessage">Let's have a great day, Projoto!</span></div>
+  <div class="reward">
+    <span>🎖️ Next reward</span><b id="nextReward">50 points</b>
+  </div>
+</section>
+
 
 
 <!-- ================= PROFILE ================= -->
@@ -520,7 +577,7 @@ footer{
     >
 
     <label>
-      English grammer
+      English Grammar
     </label>
 
   </div>
@@ -623,6 +680,19 @@ footer{
 </section>
 
 
+
+<!-- ================= 365-DAY BRAIN CHALLENGE ================= -->
+<section class="card brain365-card">
+  <h3>🧠 Today's Brain Challenge</h3>
+  <div class="brain365-meta">
+    <span id="brainCategory">📚 Brain</span>
+    <span id="brainDay">Day 1 of 365</span>
+  </div>
+  <div id="brainQuestion" class="quiz-question">Loading today's challenge…</div>
+  <div id="brainOptions" class="brain-options"></div>
+  <div id="quizAnswer" class="quiz-answer" aria-live="polite"></div>
+</section>
+
 <!-- ================= STAR ================= -->
 
 <section class="card">
@@ -668,12 +738,12 @@ footer{
 
   <div class="task">
     <input type="checkbox" class="goalbox">
-    <label>I an a brave boy</label>
+    <label>I am a brave boy</label>
   </div>
 
  <div class="task">
     <input type="checkbox" class="goalbox">
-    <label>I an NOT a brave boy</label>
+    <label>I am NOT a brave boy</label>
   </div>
 <br><br>
 🌟
@@ -688,7 +758,7 @@ footer{
 <section class="card">
 
   <h3>
-    📱 Should NOT used Electronic gadget 🎮
+    📱 Use Electronic Gadgets Wisely 🎮
   </h3>
 
 
@@ -736,7 +806,7 @@ footer{
 
 <footer>
 
-  Made with ❤️ for Projoto Bhowmick
+  Made with ❤️ for Projoto Bhowmick • Learn • Play • Grow
 
 </footer>
 
@@ -757,85 +827,128 @@ function photoError(){
 
 
 /* =====================================================
-   DAILY TASKS
+   DAILY TASKS + GROWTH SCORE
 ===================================================== */
 
-const boxes =
-  document.querySelectorAll(".taskbox");
-
+const boxes = document.querySelectorAll(".taskbox");
+const goals = document.querySelectorAll(".goalbox");
+const todayKey = new Date().toISOString().slice(0,10);
 
 function updateProgress(){
-
   let done=0;
-
   boxes.forEach((b,i)=>{
-
-    if(b.checked){
-
-      done++;
-
-      b.parentElement.classList.add("done");
-
-    }else{
-
-      b.parentElement.classList.remove("done");
-
-    }
-
-    localStorage.setItem(
-      "projoto_task_"+i,
-      b.checked
-    );
-
+    if(b.checked) done++;
+    b.parentElement.classList.toggle("done",b.checked);
+    localStorage.setItem("projoto_task_"+i,b.checked);
   });
 
+  goals.forEach((b,i)=>{
+    b.parentElement.classList.toggle("done",b.checked);
+    localStorage.setItem("projoto_goal_"+i,b.checked);
+  });
 
-  document.getElementById("count")
-    .textContent=done;
+  const goalDone=[...goals].filter(x=>x.checked).length;
+  const total=boxes.length;
+  const percent=Math.round(done/total*100);
+  const points=done*10+goalDone*5;
 
+  document.getElementById("count").textContent=done;
+  document.getElementById("progress").style.width=percent+"%";
+  document.getElementById("score").textContent=points;
+  document.getElementById("stars").textContent=points;
+  document.getElementById("goalCount").textContent=goalDone;
+  document.getElementById("percent").textContent=percent+"%";
+  document.getElementById("scoreRing").style.setProperty("--score",percent+"%");
+  document.getElementById("nextReward").textContent =
+    points < 50 ? (50-points)+" points" :
+    points < 100 ? (100-points)+" points" :
+    "Super Learner 🏆";
 
-  document.getElementById("progress")
-    .style.width=
-      (done/boxes.length*100)+"%";
+  const msg=document.getElementById("dashboardMessage");
+  msg.textContent = percent===100 ? "🎉 Amazing! You completed all daily tasks!" :
+                    percent>=75 ? "🌟 Fantastic work! Keep going!" :
+                    percent>=40 ? "💪 Great progress! One step at a time." :
+                    "😊 Let's have a great day, Projoto!";
 
+  localStorage.setItem("projoto_points_"+todayKey,points);
 }
-
 
 boxes.forEach((b,i)=>{
-
-  b.checked =
-    localStorage.getItem(
-      "projoto_task_"+i
-    ) === "true";
-
-
-  b.addEventListener(
-    "change",
-    updateProgress
-  );
-
+  b.checked=localStorage.getItem("projoto_task_"+i)==="true";
+  b.addEventListener("change",updateProgress);
+});
+goals.forEach((b,i)=>{
+  b.checked=localStorage.getItem("projoto_goal_"+i)==="true";
+  b.addEventListener("change",updateProgress);
 });
 
-
 function resetTasks(){
-
-  boxes.forEach((b,i)=>{
-
-    b.checked=false;
-
-    localStorage.removeItem(
-      "projoto_task_"+i
-    );
-
-  });
-
+  boxes.forEach((b,i)=>{b.checked=false;localStorage.removeItem("projoto_task_"+i);});
+  goals.forEach((b,i)=>{b.checked=false;localStorage.removeItem("projoto_goal_"+i);});
   updateProgress();
-
 }
 
+/* =====================================================
+   365-DAY BRAIN CHALLENGE
+===================================================== */
+const brainQuestions = [{"q":"What is 2 + 3?","options":["4","5","6"],"answer":"5","category":"Math"},{"q":"What is 3 + 4?","options":["6","7","8"],"answer":"7","category":"Math"},{"q":"What is 4 + 5?","options":["8","9","10"],"answer":"9","category":"Math"},{"q":"What is 5 + 6?","options":["10","11","12"],"answer":"11","category":"Math"},{"q":"What is 6 + 7?","options":["12","13","14"],"answer":"13","category":"Math"},{"q":"What is 7 + 8?","options":["14","15","16"],"answer":"15","category":"Math"},{"q":"What is 8 + 9?","options":["16","17","18"],"answer":"17","category":"Math"},{"q":"What is 9 + 1?","options":["9","10","11"],"answer":"10","category":"Math"},{"q":"What is 10 + 2?","options":["11","12","13"],"answer":"12","category":"Math"},{"q":"What is 11 + 3?","options":["13","14","15"],"answer":"14","category":"Math"},{"q":"What is 12 + 4?","options":["15","16","17"],"answer":"16","category":"Math"},{"q":"What is 13 + 5?","options":["17","18","19"],"answer":"18","category":"Math"},{"q":"What is 14 + 6?","options":["19","20","21"],"answer":"20","category":"Math"},{"q":"What is 15 + 7?","options":["21","22","23"],"answer":"22","category":"Math"},{"q":"What is 16 + 8?","options":["23","24","25"],"answer":"24","category":"Math"},{"q":"What is 17 + 9?","options":["25","26","27"],"answer":"26","category":"Math"},{"q":"What is 18 + 1?","options":["18","19","20"],"answer":"19","category":"Math"},{"q":"What is 19 + 2?","options":["20","21","22"],"answer":"21","category":"Math"},{"q":"What is 20 + 3?","options":["22","23","24"],"answer":"23","category":"Math"},{"q":"What is 21 + 4?","options":["24","25","26"],"answer":"25","category":"Math"},{"q":"What is 22 + 5?","options":["26","27","28"],"answer":"27","category":"Math"},{"q":"What is 23 + 6?","options":["28","29","30"],"answer":"29","category":"Math"},{"q":"What is 24 + 7?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 25 + 8?","options":["32","33","34"],"answer":"33","category":"Math"},{"q":"What is 26 + 9?","options":["34","35","36"],"answer":"35","category":"Math"},{"q":"What is 27 + 1?","options":["27","28","29"],"answer":"28","category":"Math"},{"q":"What is 28 + 2?","options":["29","30","31"],"answer":"30","category":"Math"},{"q":"What is 29 + 3?","options":["31","32","33"],"answer":"32","category":"Math"},{"q":"What is 30 + 4?","options":["33","34","35"],"answer":"34","category":"Math"},{"q":"What is 31 + 5?","options":["35","36","37"],"answer":"36","category":"Math"},{"q":"What is 32 + 6?","options":["37","38","39"],"answer":"38","category":"Math"},{"q":"What is 33 + 7?","options":["39","40","41"],"answer":"40","category":"Math"},{"q":"What is 34 + 8?","options":["41","42","43"],"answer":"42","category":"Math"},{"q":"What is 35 + 9?","options":["43","44","45"],"answer":"44","category":"Math"},{"q":"What is 36 + 1?","options":["36","37","38"],"answer":"37","category":"Math"},{"q":"What is 37 + 2?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 38 + 3?","options":["40","41","42"],"answer":"41","category":"Math"},{"q":"What is 39 + 4?","options":["42","43","44"],"answer":"43","category":"Math"},{"q":"What is 40 + 5?","options":["44","45","46"],"answer":"45","category":"Math"},{"q":"What is 41 + 6?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 42 + 7?","options":["48","49","50"],"answer":"49","category":"Math"},{"q":"What is 43 + 8?","options":["50","51","52"],"answer":"51","category":"Math"},{"q":"What is 44 + 9?","options":["52","53","54"],"answer":"53","category":"Math"},{"q":"What is 45 + 1?","options":["45","46","47"],"answer":"46","category":"Math"},{"q":"What is 46 + 2?","options":["47","48","49"],"answer":"48","category":"Math"},{"q":"What is 47 + 3?","options":["49","50","51"],"answer":"50","category":"Math"},{"q":"What is 48 + 4?","options":["51","52","53"],"answer":"52","category":"Math"},{"q":"What is 49 + 5?","options":["53","54","55"],"answer":"54","category":"Math"},{"q":"What is 50 + 6?","options":["55","56","57"],"answer":"56","category":"Math"},{"q":"What is 51 + 7?","options":["57","58","59"],"answer":"58","category":"Math"},{"q":"What is 52 + 8?","options":["59","60","61"],"answer":"60","category":"Math"},{"q":"What is 53 + 9?","options":["61","62","63"],"answer":"62","category":"Math"},{"q":"What is 54 + 1?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 55 + 2?","options":["56","57","58"],"answer":"57","category":"Math"},{"q":"What is 56 + 3?","options":["58","59","60"],"answer":"59","category":"Math"},{"q":"What is 57 + 4?","options":["60","61","62"],"answer":"61","category":"Math"},{"q":"What is 58 + 5?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 59 + 6?","options":["64","65","66"],"answer":"65","category":"Math"},{"q":"What is 60 + 7?","options":["66","67","68"],"answer":"67","category":"Math"},{"q":"What is 61 + 8?","options":["68","69","70"],"answer":"69","category":"Math"},{"q":"What is 62 + 9?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 63 + 1?","options":["63","64","65"],"answer":"64","category":"Math"},{"q":"What is 64 + 2?","options":["65","66","67"],"answer":"66","category":"Math"},{"q":"What is 65 + 3?","options":["67","68","69"],"answer":"68","category":"Math"},{"q":"What is 66 + 4?","options":["69","70","71"],"answer":"70","category":"Math"},{"q":"What is 67 + 5?","options":["71","72","73"],"answer":"72","category":"Math"},{"q":"What is 68 + 6?","options":["73","74","75"],"answer":"74","category":"Math"},{"q":"What is 69 + 7?","options":["75","76","77"],"answer":"76","category":"Math"},{"q":"What is 70 + 8?","options":["77","78","79"],"answer":"78","category":"Math"},{"q":"What is 71 + 9?","options":["79","80","81"],"answer":"80","category":"Math"},{"q":"What is 72 + 1?","options":["72","73","74"],"answer":"73","category":"Math"},{"q":"What is 73 + 2?","options":["74","75","76"],"answer":"75","category":"Math"},{"q":"What is 74 + 3?","options":["76","77","78"],"answer":"77","category":"Math"},{"q":"What is 75 + 4?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 76 + 5?","options":["80","81","82"],"answer":"81","category":"Math"},{"q":"What is 77 + 6?","options":["82","83","84"],"answer":"83","category":"Math"},{"q":"What is 78 + 7?","options":["84","85","86"],"answer":"85","category":"Math"},{"q":"What is 79 + 8?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 80 + 9?","options":["88","89","90"],"answer":"89","category":"Math"},{"q":"What is 81 + 1?","options":["81","82","83"],"answer":"82","category":"Math"},{"q":"What is 82 + 2?","options":["83","84","85"],"answer":"84","category":"Math"},{"q":"What is 83 + 3?","options":["85","86","87"],"answer":"86","category":"Math"},{"q":"What is 84 + 4?","options":["87","88","89"],"answer":"88","category":"Math"},{"q":"What is 85 + 5?","options":["89","90","91"],"answer":"90","category":"Math"},{"q":"What is 86 + 6?","options":["91","92","93"],"answer":"92","category":"Math"},{"q":"What is 87 + 7?","options":["93","94","95"],"answer":"94","category":"Math"},{"q":"What is 88 + 8?","options":["95","96","97"],"answer":"96","category":"Math"},{"q":"What is 89 + 9?","options":["97","98","99"],"answer":"98","category":"Math"},{"q":"What is 90 + 1?","options":["90","91","92"],"answer":"91","category":"Math"},{"q":"What is 91 + 2?","options":["92","93","94"],"answer":"93","category":"Math"},{"q":"What is 92 + 3?","options":["94","95","96"],"answer":"95","category":"Math"},{"q":"What is 93 + 4?","options":["96","97","98"],"answer":"97","category":"Math"},{"q":"What is 94 + 5?","options":["98","99","100"],"answer":"99","category":"Math"},{"q":"What is 95 + 6?","options":["100","101","102"],"answer":"101","category":"Math"},{"q":"What is 96 + 7?","options":["102","103","104"],"answer":"103","category":"Math"},{"q":"What is 97 + 8?","options":["104","105","106"],"answer":"105","category":"Math"},{"q":"What is 98 + 9?","options":["106","107","108"],"answer":"107","category":"Math"},{"q":"What is 99 + 1?","options":["99","100","101"],"answer":"100","category":"Math"},{"q":"What is 100 + 2?","options":["101","102","103"],"answer":"102","category":"Math"},{"q":"What is 101 + 3?","options":["103","104","105"],"answer":"104","category":"Math"},{"q":"What is 30 − 7?","options":["22","23","24"],"answer":"23","category":"Math"},{"q":"What is 31 − 8?","options":["22","23","24"],"answer":"23","category":"Math"},{"q":"What is 32 − 1?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 33 − 2?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 34 − 3?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 35 − 4?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 36 − 5?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 37 − 6?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 38 − 7?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 39 − 8?","options":["30","31","32"],"answer":"31","category":"Math"},{"q":"What is 40 − 1?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 41 − 2?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 42 − 3?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 43 − 4?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 44 − 5?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 45 − 6?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 46 − 7?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 47 − 8?","options":["38","39","40"],"answer":"39","category":"Math"},{"q":"What is 48 − 1?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 49 − 2?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 50 − 3?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 51 − 4?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 52 − 5?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 53 − 6?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 54 − 7?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 55 − 8?","options":["46","47","48"],"answer":"47","category":"Math"},{"q":"What is 56 − 1?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 57 − 2?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 58 − 3?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 59 − 4?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 60 − 5?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 61 − 6?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 62 − 7?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 63 − 8?","options":["54","55","56"],"answer":"55","category":"Math"},{"q":"What is 64 − 1?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 65 − 2?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 66 − 3?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 67 − 4?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 68 − 5?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 69 − 6?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 70 − 7?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 71 − 8?","options":["62","63","64"],"answer":"63","category":"Math"},{"q":"What is 72 − 1?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 73 − 2?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 74 − 3?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 75 − 4?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 76 − 5?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 77 − 6?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 78 − 7?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 79 − 8?","options":["70","71","72"],"answer":"71","category":"Math"},{"q":"What is 80 − 1?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 81 − 2?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 82 − 3?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 83 − 4?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 84 − 5?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 85 − 6?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 86 − 7?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 87 − 8?","options":["78","79","80"],"answer":"79","category":"Math"},{"q":"What is 88 − 1?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 89 − 2?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 90 − 3?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 91 − 4?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 92 − 5?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 93 − 6?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 94 − 7?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 95 − 8?","options":["86","87","88"],"answer":"87","category":"Math"},{"q":"What is 96 − 1?","options":["94","95","96"],"answer":"95","category":"Math"},{"q":"What is 97 − 2?","options":["94","95","96"],"answer":"95","category":"Math"},{"q":"What is 98 − 3?","options":["94","95","96"],"answer":"95","category":"Math"},{"q":"What is 99 − 4?","options":["94","95","96"],"answer":"95","category":"Math"},{"q":"What is 2 × 2?","options":["2","4","6"],"answer":"4","category":"Math"},{"q":"What is 2 × 3?","options":["4","6","8"],"answer":"6","category":"Math"},{"q":"What is 2 × 4?","options":["6","8","10"],"answer":"8","category":"Math"},{"q":"What is 2 × 5?","options":["8","10","12"],"answer":"10","category":"Math"},{"q":"What is 2 × 6?","options":["10","12","14"],"answer":"12","category":"Math"},{"q":"What is 2 × 7?","options":["12","14","16"],"answer":"14","category":"Math"},{"q":"What is 2 × 8?","options":["14","16","18"],"answer":"16","category":"Math"},{"q":"What is 2 × 9?","options":["16","18","20"],"answer":"18","category":"Math"},{"q":"What is 2 × 10?","options":["18","20","22"],"answer":"20","category":"Math"},{"q":"What is 3 × 2?","options":["4","6","8"],"answer":"6","category":"Math"},{"q":"What is 3 × 3?","options":["7","9","11"],"answer":"9","category":"Math"},{"q":"What is 3 × 4?","options":["10","12","14"],"answer":"12","category":"Math"},{"q":"What is 3 × 5?","options":["13","15","17"],"answer":"15","category":"Math"},{"q":"What is 3 × 6?","options":["16","18","20"],"answer":"18","category":"Math"},{"q":"What is 3 × 7?","options":["19","21","23"],"answer":"21","category":"Math"},{"q":"What is 3 × 8?","options":["22","24","26"],"answer":"24","category":"Math"},{"q":"What is 3 × 9?","options":["25","27","29"],"answer":"27","category":"Math"},{"q":"What is 3 × 10?","options":["28","30","32"],"answer":"30","category":"Math"},{"q":"What is 4 × 2?","options":["6","8","10"],"answer":"8","category":"Math"},{"q":"What is 4 × 3?","options":["10","12","14"],"answer":"12","category":"Math"},{"q":"What is 4 × 4?","options":["14","16","18"],"answer":"16","category":"Math"},{"q":"What is 4 × 5?","options":["18","20","22"],"answer":"20","category":"Math"},{"q":"What is 4 × 6?","options":["22","24","26"],"answer":"24","category":"Math"},{"q":"What is 4 × 7?","options":["26","28","30"],"answer":"28","category":"Math"},{"q":"What is 4 × 8?","options":["30","32","34"],"answer":"32","category":"Math"},{"q":"What is 4 × 9?","options":["34","36","38"],"answer":"36","category":"Math"},{"q":"What is 4 × 10?","options":["38","40","42"],"answer":"40","category":"Math"},{"q":"What is 5 × 2?","options":["8","10","12"],"answer":"10","category":"Math"},{"q":"What is 5 × 3?","options":["13","15","17"],"answer":"15","category":"Math"},{"q":"What is 5 × 4?","options":["18","20","22"],"answer":"20","category":"Math"},{"q":"What is 5 × 5?","options":["23","25","27"],"answer":"25","category":"Math"},{"q":"What is 5 × 6?","options":["28","30","32"],"answer":"30","category":"Math"},{"q":"What is 5 × 7?","options":["33","35","37"],"answer":"35","category":"Math"},{"q":"What is 5 × 8?","options":["38","40","42"],"answer":"40","category":"Math"},{"q":"What is 5 × 9?","options":["43","45","47"],"answer":"45","category":"Math"},{"q":"What is 5 × 10?","options":["48","50","52"],"answer":"50","category":"Math"},{"q":"What is 6 × 2?","options":["10","12","14"],"answer":"12","category":"Math"},{"q":"What is 6 × 3?","options":["16","18","20"],"answer":"18","category":"Math"},{"q":"What is 6 × 4?","options":["22","24","26"],"answer":"24","category":"Math"},{"q":"What is 6 × 5?","options":["28","30","32"],"answer":"30","category":"Math"},{"q":"What is 6 × 6?","options":["34","36","38"],"answer":"36","category":"Math"},{"q":"What is 6 × 7?","options":["40","42","44"],"answer":"42","category":"Math"},{"q":"What is 6 × 8?","options":["46","48","50"],"answer":"48","category":"Math"},{"q":"What is 6 × 9?","options":["52","54","56"],"answer":"54","category":"Math"},{"q":"What is 6 × 10?","options":["58","60","62"],"answer":"60","category":"Math"},{"q":"Opposite of hot?","options":["Cold","Tall","Fast"],"answer":"Cold","category":"English"},{"q":"Opposite of big?","options":["Small","Long","Loud"],"answer":"Small","category":"English"},{"q":"Opposite of happy?","options":["Sad","Quick","Clean"],"answer":"Sad","category":"English"},{"q":"Opposite of up?","options":["Down","Near","Open"],"answer":"Down","category":"English"},{"q":"Opposite of day?","options":["Night","Light","Morning"],"answer":"Night","category":"English"},{"q":"Which is a fruit?","options":["Mango","Chair","Pencil"],"answer":"Mango","category":"English"},{"q":"Which is an animal?","options":["Rabbit","Table","Book"],"answer":"Rabbit","category":"English"},{"q":"Which is a colour?","options":["Blue","Run","Happy"],"answer":"Blue","category":"English"},{"q":"Which is a verb?","options":["Jump","Apple","Green"],"answer":"Jump","category":"English"},{"q":"Which is a noun?","options":["School","Quickly","Run"],"answer":"School","category":"English"},{"q":"Which rhymes with cat?","options":["Hat","Dog","Sun"],"answer":"Hat","category":"English"},{"q":"Which rhymes with tree?","options":["Bee","Book","Car"],"answer":"Bee","category":"English"},{"q":"Plural of 'cat'?","options":["Cats","Cates","Cat"],"answer":"Cats","category":"English"},{"q":"Plural of 'box'?","options":["Boxes","Boxs","Box"],"answer":"Boxes","category":"English"},{"q":"Plural of 'child'?","options":["Children","Childs","Childes"],"answer":"Children","category":"English"},{"q":"Which article fits: ___ apple?","options":["an","a","are"],"answer":"an","category":"English"},{"q":"Which article fits: ___ ball?","options":["a","an","are"],"answer":"a","category":"English"},{"q":"Same meaning as big?","options":["Large","Tiny","Slow"],"answer":"Large","category":"English"},{"q":"Same meaning as quick?","options":["Fast","Late","Soft"],"answer":"Fast","category":"English"},{"q":"Same meaning as smart?","options":["Clever","Cold","Round"],"answer":"Clever","category":"English"},{"q":"Complete: I ___ a student.","options":["am","is","are"],"answer":"am","category":"English"},{"q":"Complete: They ___ happy.","options":["are","is","am"],"answer":"are","category":"English"},{"q":"Complete: She ___ a book.","options":["has","have","having"],"answer":"has","category":"English"},{"q":"Which is a greeting?","options":["Good morning!","Close the door.","I have a pencil."],"answer":"Good morning!","category":"English"},{"q":"Which word begins with B?","options":["Ball","Apple","Cat"],"answer":"Ball","category":"English"},{"q":"Which word begins with M?","options":["Moon","Sun","Fish"],"answer":"Moon","category":"English"},{"q":"Which has three letters?","options":["Sun","School","Elephant"],"answer":"Sun","category":"English"},{"q":"Which has five letters?","options":["Apple","Book","Sun"],"answer":"Apple","category":"English"},{"q":"First letter of 'banana'?","options":["B","A","N"],"answer":"B","category":"English"},{"q":"Last letter of 'school'?","options":["L","S","C"],"answer":"L","category":"English"},{"q":"Which is a complete sentence?","options":["The dog runs.","Dog runs","the dog"],"answer":"The dog runs.","category":"English"},{"q":"Which word describes a flower?","options":["Beautiful","Jump","Quickly"],"answer":"Beautiful","category":"English"},{"q":"Which word describes a rabbit movement?","options":["Hops","Blue","Chair"],"answer":"Hops","category":"English"},{"q":"Which is a pronoun?","options":["He","House","Happy"],"answer":"He","category":"English"},{"q":"Which is a place?","options":["Park","Jump","Yellow"],"answer":"Park","category":"English"},{"q":"Which can you read?","options":["Book","Cloud","Run"],"answer":"Book","category":"English"},{"q":"Which organ helps you see?","options":["Eyes","Ears","Nose"],"answer":"Eyes","category":"Science"},{"q":"Which organ helps you hear?","options":["Ears","Eyes","Hands"],"answer":"Ears","category":"Science"},{"q":"Which helps you smell?","options":["Nose","Knee","Elbow"],"answer":"Nose","category":"Science"},{"q":"Which body part helps you taste?","options":["Tongue","Foot","Hair"],"answer":"Tongue","category":"Science"},{"q":"Which plant part grows underground?","options":["Root","Flower","Leaf"],"answer":"Root","category":"Science"},{"q":"Which plant part makes food?","options":["Leaf","Root","Seed"],"answer":"Leaf","category":"Science"},{"q":"What do plants need from the Sun?","options":["Light","Music","Shoes"],"answer":"Light","category":"Science"},{"q":"Which gas do humans breathe in?","options":["Oxygen","Helium","Smoke"],"answer":"Oxygen","category":"Science"},{"q":"Which animal gives us milk?","options":["Cow","Tiger","Eagle"],"answer":"Cow","category":"Science"},{"q":"Which animal has a trunk?","options":["Elephant","Rabbit","Horse"],"answer":"Elephant","category":"Science"},{"q":"Which animal has fins?","options":["Fish","Dog","Cat"],"answer":"Fish","category":"Science"},{"q":"What happens to ice when warm?","options":["It melts","It grows","It becomes wood"],"answer":"It melts","category":"Science"},{"q":"What is frozen water called?","options":["Ice","Steam","Rain"],"answer":"Ice","category":"Science"},{"q":"What is water gas called?","options":["Water vapour","Stone","Soil"],"answer":"Water vapour","category":"Science"},{"q":"Which season is hot?","options":["Summer","Winter","Autumn"],"answer":"Summer","category":"Science"},{"q":"Which season is cold?","options":["Winter","Summer","Spring"],"answer":"Winter","category":"Science"},{"q":"What gives Earth light by day?","options":["Sun","Moon","Stars"],"answer":"Sun","category":"Science"},{"q":"What do we see at night?","options":["Moon and stars","Only clouds","Only birds"],"answer":"Moon and stars","category":"Science"},{"q":"Which can a magnet attract?","options":["Iron nail","Paper cup","Wooden spoon"],"answer":"Iron nail","category":"Science"},{"q":"What pulls things toward Earth?","options":["Gravity","Music","Wind"],"answer":"Gravity","category":"Science"},{"q":"Which is usually transparent?","options":["Glass","Brick","Wood"],"answer":"Glass","category":"Science"},{"q":"Which sense feels hot or cold?","options":["Touch","Hearing","Smell"],"answer":"Touch","category":"Science"},{"q":"Which animal has a shell?","options":["Turtle","Lion","Cow"],"answer":"Turtle","category":"Science"},{"q":"Which insect makes honey?","options":["Honeybee","Ant","Butterfly"],"answer":"Honeybee","category":"Science"},{"q":"Which insect starts as a caterpillar?","options":["Butterfly","Ant","Bee"],"answer":"Butterfly","category":"Science"},{"q":"Which animal has black-and-white stripes?","options":["Zebra","Elephant","Camel"],"answer":"Zebra","category":"Science"},{"q":"Which animal has a hump?","options":["Camel","Penguin","Frog"],"answer":"Camel","category":"Science"},{"q":"Which animal lives on land and in water?","options":["Frog","Eagle","Cow"],"answer":"Frog","category":"Science"},{"q":"What do fish use to breathe?","options":["Gills","Wings","Fur"],"answer":"Gills","category":"Science"},{"q":"Which planet do we live on?","options":["Earth","Mars","Jupiter"],"answer":"Earth","category":"Science"},{"q":"Which planet has famous rings?","options":["Saturn","Mercury","Earth"],"answer":"Saturn","category":"Science"},{"q":"Earth's natural satellite?","options":["Moon","Sun","Mars"],"answer":"Moon","category":"Science"},{"q":"Is the Sun a star?","options":["Yes","No","Only at night"],"answer":"Yes","category":"Science"},{"q":"Which is hotter?","options":["Boiling water","Ice","They are the same"],"answer":"Boiling water","category":"Science"},{"q":"What should we drink to stay hydrated?","options":["Water","Sand","Oil"],"answer":"Water","category":"Science"},{"q":"Which keeps teeth clean?","options":["Brushing","Sleeping","Running"],"answer":"Brushing","category":"Science"},{"q":"Which body part pumps blood?","options":["Heart","Lung","Stomach"],"answer":"Heart","category":"Science"},{"q":"Which organs help us breathe?","options":["Lungs","Ears","Bones"],"answer":"Lungs","category":"Science"},{"q":"What protects the brain?","options":["Skull","Knee","Toes"],"answer":"Skull","category":"Science"},{"q":"Which is renewable energy?","options":["Sunlight","Coal","Petrol"],"answer":"Sunlight","category":"Science"},{"q":"What is moving air called?","options":["Wind","Rain","Fog"],"answer":"Wind","category":"Science"},{"q":"Which instrument measures temperature?","options":["Thermometer","Compass","Clock"],"answer":"Thermometer","category":"Science"},{"q":"Which instrument shows direction?","options":["Compass","Ruler","Thermometer"],"answer":"Compass","category":"Science"},{"q":"What do magnets have at their ends?","options":["Poles","Wings","Roots"],"answer":"Poles","category":"Science"},{"q":"What happens when you push a toy car?","options":["It can move","It becomes water","It grows"],"answer":"It can move","category":"Science"},{"q":"Capital of India?","options":["New Delhi","Mumbai","Kolkata"],"answer":"New Delhi","category":"GK"},{"q":"National animal of India?","options":["Bengal tiger","Lion","Elephant"],"answer":"Bengal tiger","category":"GK"},{"q":"National bird of India?","options":["Peacock","Parrot","Sparrow"],"answer":"Peacock","category":"GK"},{"q":"National flower of India?","options":["Lotus","Rose","Sunflower"],"answer":"Lotus","category":"GK"},{"q":"Festival of lights?","options":["Diwali","Holi","Eid"],"answer":"Diwali","category":"GK"},{"q":"Festival of colours?","options":["Holi","Diwali","Christmas"],"answer":"Holi","category":"GK"},{"q":"India's Independence Day?","options":["15 August","26 January","2 October"],"answer":"15 August","category":"GK"},{"q":"India's Republic Day?","options":["26 January","15 August","14 November"],"answer":"26 January","category":"GK"},{"q":"Children's Day in India?","options":["14 November","2 October","5 September"],"answer":"14 November","category":"GK"},{"q":"Teachers' Day in India?","options":["5 September","15 August","26 January"],"answer":"5 September","category":"GK"},{"q":"Who wrote the Indian national anthem?","options":["Rabindranath Tagore","A. P. J. Abdul Kalam","C. V. Raman"],"answer":"Rabindranath Tagore","category":"GK"},{"q":"Which city is called the City of Joy?","options":["Kolkata","Delhi","Chennai"],"answer":"Kolkata","category":"GK"},{"q":"Which river flows through Kolkata?","options":["Hooghly","Yamuna","Godavari"],"answer":"Hooghly","category":"GK"},{"q":"Which continent is India in?","options":["Asia","Africa","Europe"],"answer":"Asia","category":"GK"},{"q":"Largest ocean?","options":["Pacific Ocean","Indian Ocean","Arctic Ocean"],"answer":"Pacific Ocean","category":"GK"},{"q":"How many days in a week?","options":["7","5","10"],"answer":"7","category":"GK"},{"q":"How many months in a year?","options":["12","10","14"],"answer":"12","category":"GK"},{"q":"How many hours in a day?","options":["24","12","48"],"answer":"24","category":"GK"},{"q":"How many minutes in an hour?","options":["60","30","100"],"answer":"60","category":"GK"},{"q":"How many seconds in a minute?","options":["60","30","100"],"answer":"60","category":"GK"},{"q":"Sun rises from which direction?","options":["East","West","North"],"answer":"East","category":"GK"},{"q":"Sun sets in which direction?","options":["West","East","South"],"answer":"West","category":"GK"},{"q":"Vehicle that travels on railway tracks?","options":["Train","Bus","Bicycle"],"answer":"Train","category":"GK"},{"q":"Vehicle that flies?","options":["Aeroplane","Boat","Train"],"answer":"Aeroplane","category":"GK"},{"q":"Vehicle that travels on water?","options":["Boat","Bus","Car"],"answer":"Boat","category":"GK"},{"q":"What tells the time?","options":["Clock","Ruler","Compass"],"answer":"Clock","category":"GK"},{"q":"What measures length?","options":["Ruler","Spoon","Clock"],"answer":"Ruler","category":"GK"},{"q":"Traffic light colour for stop?","options":["Red","Green","Blue"],"answer":"Red","category":"GK"},{"q":"Traffic light colour for go?","options":["Green","Red","Black"],"answer":"Green","category":"GK"},{"q":"Largest land animal?","options":["Elephant","Horse","Dog"],"answer":"Elephant","category":"GK"},{"q":"Fastest land animal?","options":["Cheetah","Elephant","Turtle"],"answer":"Cheetah","category":"GK"},{"q":"Animal famous for bamboo?","options":["Panda","Tiger","Camel"],"answer":"Panda","category":"GK"},{"q":"Bird that can copy human speech?","options":["Parrot","Penguin","Ostrich"],"answer":"Parrot","category":"GK"},{"q":"Animal that carries baby in a pouch?","options":["Kangaroo","Tiger","Giraffe"],"answer":"Kangaroo","category":"GK"},{"q":"Country famous for Eiffel Tower?","options":["France","India","Brazil"],"answer":"France","category":"GK"},{"q":"Country famous for pyramids of Giza?","options":["Egypt","Japan","Canada"],"answer":"Egypt","category":"GK"},{"q":"What comes next: 2, 4, 6, ?","options":["8","7","10"],"answer":"8","category":"Brain"},{"q":"What comes next: 5, 10, 15, ?","options":["20","18","25"],"answer":"20","category":"Brain"},{"q":"What comes next: 10, 9, 8, ?","options":["7","6","5"],"answer":"7","category":"Brain"},{"q":"What comes next: 1, 3, 5, ?","options":["7","6","8"],"answer":"7","category":"Brain"},{"q":"What comes next: 10, 20, 30, ?","options":["40","35","50"],"answer":"40","category":"Brain"},{"q":"Which is different?","options":["Apple","Mango","Car"],"answer":"Car","category":"Brain"},{"q":"Which is different?","options":["Dog","Cat","Table"],"answer":"Table","category":"Brain"},{"q":"Which is different?","options":["Red","Blue","Banana"],"answer":"Banana","category":"Brain"},{"q":"Which is smallest?","options":["3","8","5"],"answer":"3","category":"Brain"},{"q":"Which is largest?","options":["9","6","7"],"answer":"9","category":"Brain"},{"q":"2 apples + 1 apple = ?","options":["3","2","4"],"answer":"3","category":"Brain"},{"q":"5 birds − 2 birds = ?","options":["3","2","4"],"answer":"3","category":"Brain"},{"q":"Which comes first alphabetically?","options":["A","M","Z"],"answer":"A","category":"Brain"},{"q":"Which comes last alphabetically?","options":["Z","B","C"],"answer":"Z","category":"Brain"},{"q":"Which shape has no corners?","options":["Circle","Square","Triangle"],"answer":"Circle","category":"Brain"},{"q":"Which shape has four equal sides?","options":["Square","Triangle","Circle"],"answer":"Square","category":"Brain"},{"q":"Which is heavier?","options":["Stone","Feather","Paper"],"answer":"Stone","category":"Brain"},{"q":"Which is longer?","options":["Metre","Centimetre","Millimetre"],"answer":"Metre","category":"Brain"},{"q":"Which container holds more?","options":["Bucket","Cup","Spoon"],"answer":"Bucket","category":"Brain"},{"q":"Which comes next: A, B, C, ?","options":["D","E","F"],"answer":"D","category":"Brain"},{"q":"How many squares are on a chessboard?","options":["64","32","100"],"answer":"64","category":"Chess"},{"q":"How many kings does each player have?","options":["1","2","4"],"answer":"1","category":"Chess"},{"q":"How many queens does each player start with?","options":["1","2","8"],"answer":"1","category":"Chess"},{"q":"How many rooks does each player start with?","options":["2","1","4"],"answer":"2","category":"Chess"},{"q":"How many bishops does each player start with?","options":["2","1","4"],"answer":"2","category":"Chess"},{"q":"How many knights does each player start with?","options":["2","1","8"],"answer":"2","category":"Chess"},{"q":"How many pawns does each player start with?","options":["8","6","10"],"answer":"8","category":"Chess"},{"q":"Which piece moves in an L shape?","options":["Knight","Bishop","Rook"],"answer":"Knight","category":"Chess"},{"q":"Which piece moves diagonally?","options":["Bishop","Rook","Knight"],"answer":"Bishop","category":"Chess"},{"q":"Which piece moves in straight lines?","options":["Rook","Knight","Bishop"],"answer":"Rook","category":"Chess"},{"q":"Which piece is usually most powerful?","options":["Queen","Pawn","Knight"],"answer":"Queen","category":"Chess"},{"q":"Which piece must be protected most carefully?","options":["King","Pawn","Bishop"],"answer":"King","category":"Chess"},{"q":"What does check mean?","options":["The king is under attack","A pawn is promoted","The game is over"],"answer":"The king is under attack","category":"Chess"}];
+
+function localDateKey(date = new Date()) {
+  const y=date.getFullYear();
+  const m=String(date.getMonth()+1).padStart(2,"0");
+  const d=String(date.getDate()).padStart(2,"0");
+  return `${y}-${m}-${d}`;
+}
+
+function brainDayNumber(date = new Date()) {
+  const epoch = new Date(2026,0,1);
+  const current = new Date(date.getFullYear(),date.getMonth(),date.getDate());
+  return Math.floor((current-epoch)/86400000);
+}
+
+function loadBrainChallenge() {
+  const today=localDateKey();
+  const index=((brainDayNumber()%brainQuestions.length)+brainQuestions.length)%brainQuestions.length;
+  const item=brainQuestions[index];
+  const saved=JSON.parse(localStorage.getItem("projoto_brain_"+today)||"null");
+  const q=document.getElementById("brainQuestion");
+  const opts=document.getElementById("brainOptions");
+  const ans=document.getElementById("quizAnswer");
+  const cat=document.getElementById("brainCategory");
+  const day=document.getElementById("brainDay");
+  if(!q||!opts) return;
+  cat.textContent="📚 "+item.category;
+  day.textContent=`Day ${index+1} of 365`;
+  q.textContent=item.q;
+  opts.innerHTML="";
+  ans.textContent="";
+  const choices=[...item.options].sort(()=>Math.random()-0.5);
+  choices.forEach(choice=>{
+    const b=document.createElement("button");
+    b.className="brain-option"; b.type="button"; b.textContent=choice;
+    if(saved){
+      b.disabled=true;
+      if(choice===item.answer)b.classList.add("correct");
+      if(choice===saved.selected && choice!==item.answer)b.classList.add("wrong");
+    }else{
+      b.onclick=()=>{
+        const correct=choice===item.answer;
+        localStorage.setItem("projoto_brain_"+today,JSON.stringify({selected:choice,correct}));
+        [...opts.children].forEach(x=>{x.disabled=true;if(x.textContent===item.answer)x.classList.add("correct");});
+        if(!correct)b.classList.add("wrong");
+        ans.textContent=correct?"🎉 Correct! Excellent thinking, Projoto!":"💡 Good try! The answer is "+item.answer+".";
+      };
+    }
+    opts.appendChild(b);
+  });
+  if(saved) ans.textContent=saved.correct?"🌟 You already solved today's challenge!":"💡 Today's answer is "+item.answer+".";
+}
+
+function checkAnswer() { loadBrainChallenge(); }
+
+loadBrainChallenge();
 
 updateProgress();
-
 
 /* =====================================================
    CHESS TIMER
